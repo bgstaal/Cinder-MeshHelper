@@ -129,7 +129,7 @@ void TriMeshSampleApp::createMeshes()
 	mCylinder	= MeshHelper::createCylinderTriMesh( mNumSegments );
 	mRing		= MeshHelper::createRingTriMesh( mNumSegments );
 	mSphere		= MeshHelper::createSphereTriMesh( mNumSegments );
-	mSquare		= MeshHelper::createSquareTriMesh();
+	mSquare		= MeshHelper::createSquareTriMesh(mNumSegments, mNumSegments);
 	
 	/////////////////////////////////////////////////////////////////////////////
 	// Custom mesh
@@ -391,7 +391,7 @@ void TriMeshSampleApp::update()
 	}
 
 	// Update light on every frame
-	mLight->update( mCamera );
+	//mLight->update( mCamera );
 }
 
 CINDER_APP_BASIC( TriMeshSampleApp, RendererGl )

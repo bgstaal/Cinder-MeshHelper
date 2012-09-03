@@ -635,47 +635,50 @@ TriMesh MeshHelper::createSphereTriMesh( uint32_t segments )
 	return mesh;
 }
 
-TriMesh MeshHelper::createSquareTriMesh()
+TriMesh MeshHelper::createSquareTriMesh( uint32_t hSegments, uint32_t vSegments )
 {
 	vector<uint32_t> indices;
 	vector<Vec3f> normals;
 	vector<Vec3f> positions;
 	vector<Vec2f> texCoords;
-
-	Vec3f size = Vec3f::one() * 0.5f;
-	Vec3f pos0 = Vec3f( -1.0f, -1.0f, 0.0f ) * size;
-	Vec3f pos1 = Vec3f( 1.0f, -1.0f, 0.0f ) * size;
-	Vec3f pos2 = Vec3f( -1.0f, 1.0f, 0.0f ) * size;
-	Vec3f pos3 = Vec3f( 1.0f, 1.0f, 0.0f ) * size;
-
-	Vec3f norm0( 0.0f, 0.0f, 1.0f ); 
-
-	Vec2f texCoord0( 0.0f, 0.0f );
-	Vec2f texCoord1( 1.0f, 0.0f );
-	Vec2f texCoord2( 0.0f, 1.0f );
-	Vec2f texCoord3( 1.0f, 1.0f );
-
-	positions.push_back( pos0 );
-	positions.push_back( pos1 );
-	positions.push_back( pos2 ); 	
-	positions.push_back( pos3 );
-
-	for ( uint8_t i = 0; i < 4; i++ ) {
-		normals.push_back( norm0 );
+	
+	Vec3f norm0( 0.0f, 0.0f, 1.0f );
+	double xStep = 1.0 / (hSegments-1);
+	double yStep = 1.0 / (vSegments-1);
+	
+	
+	for (uint32_t x = 0; x < hSegments; x++)
+	{
+		for (uint32_t y = 0; y < vSegments; y++)
+		{
+			double xRat = xStep * x;
+			double yRat = yStep * y;
+			
+			positions.push_back(Vec3f( xRat - .5f, yRat - .5f, 0.0f ));
+			texCoords.push_back(Vec2f(xRat, yRat));
+			normals.push_back( norm0 );
+		}
 	}
-
-	texCoords.push_back( texCoord0 );
-	texCoords.push_back( texCoord1 );
-	texCoords.push_back( texCoord2 );
-	texCoords.push_back( texCoord3 );
-
-	indices.push_back( 0 );
-	indices.push_back( 1 );
-	indices.push_back( 2 );
-	indices.push_back( 2 );
-	indices.push_back( 1 );
-	indices.push_back( 3 );
-
+	
+	for (uint32_t y = 0; y < vSegments-1; y++)
+	{
+		for (uint32_t x = 0; x < hSegments-1; x++)
+		{
+			int index0 = ( y * hSegments ) + x;
+			int index1 = index0 + 1;
+			int index2 = ( ( y + 1 ) * hSegments ) + x;
+			int index3 = index2 + 1;
+			
+			indices.push_back(index0);
+			indices.push_back(index1);
+			indices.push_back(index2);
+			
+			indices.push_back(index2);
+			indices.push_back(index1);
+			indices.push_back(index3);
+		}
+	}
+	
 	TriMesh mesh = MeshHelper::createTriMesh( indices, positions, normals, texCoords );
 
 	indices.clear();
@@ -759,9 +762,9 @@ gl::VboMesh MeshHelper::createSphereVboMesh( uint32_t segments )
 	return createVboMesh( mesh.getIndices(), mesh.getVertices(), mesh.getNormals(), mesh.getTexCoords() );
 }
 
-gl::VboMesh MeshHelper::createSquareVboMesh()
+gl::VboMesh MeshHelper::createSquareVboMesh( uint32_t hSegments, uint32_t vSegments)
 {
-	TriMesh mesh = createSquareTriMesh();
+	TriMesh mesh = createSquareTriMesh( hSegments, vSegments );
 	return createVboMesh( mesh.getIndices(), mesh.getVertices(), mesh.getNormals(), mesh.getTexCoords() );
 }
 
