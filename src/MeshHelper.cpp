@@ -635,7 +635,7 @@ TriMesh MeshHelper::createSphereTriMesh( uint32_t segments )
 	return mesh;
 }
 
-TriMesh MeshHelper::createSquareTriMesh( uint32_t hSegments, uint32_t vSegments )
+TriMesh MeshHelper::createPlaneTriMesh( uint32_t hSegments, uint32_t vSegments )
 {
 	vector<uint32_t> indices;
 	vector<Vec3f> normals;
@@ -762,9 +762,9 @@ gl::VboMesh MeshHelper::createSphereVboMesh( uint32_t segments )
 	return createVboMesh( mesh.getIndices(), mesh.getVertices(), mesh.getNormals(), mesh.getTexCoords() );
 }
 
-gl::VboMesh MeshHelper::createSquareVboMesh( uint32_t hSegments, uint32_t vSegments)
+gl::VboMesh MeshHelper::createPlaneVboMesh( uint32_t hSegments, uint32_t vSegments)
 {
-	TriMesh mesh = createSquareTriMesh( hSegments, vSegments );
+	TriMesh mesh = createPlaneTriMesh( hSegments, vSegments );
 	return createVboMesh( mesh.getIndices(), mesh.getVertices(), mesh.getNormals(), mesh.getTexCoords() );
 }
 

@@ -66,7 +66,7 @@ public:
 	//! Create sphere TriMesh with a radius of 1.0 and \a segments.
 	static ci::TriMesh		createSphereTriMesh( uint32_t segments );
 	//! Create square TriMesh with an edge length of 1.0.
-	static ci::TriMesh		createSquareTriMesh( uint32_t hSegments = 1, uint32_t vSegments = 1 );
+	static ci::TriMesh		createPlaneTriMesh( uint32_t hSegments = 1, uint32_t vSegments = 1 );
 
 #if ! defined( CINDER_COCOA_TOUCH )
 	//! Create VboMesh from vectors of vertex data.
@@ -92,6 +92,6 @@ public:
 	//! Create sphere VboMesh with a radius of 1.0 and \a segments.
 	static ci::gl::VboMesh	createSphereVboMesh( uint32_t segments = 12 );
 	//! Create square VboMesh with an edge length of 1.0.
-	static ci::gl::VboMesh	createSquareVboMesh( uint32_t hSegments = 1, uint32_t vSegments = 1 );
+	static ci::gl::VboMesh	createPlaneVboMesh( uint32_t hSegments = 1, uint32_t vSegments = 1 );
 #endif
 };

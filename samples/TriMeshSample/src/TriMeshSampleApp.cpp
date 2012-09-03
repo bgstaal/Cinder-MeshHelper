@@ -61,7 +61,7 @@ private:
 		MESH_TYPE_CYLINDER, 
 		MESH_TYPE_CONE, 
 		MESH_TYPE_CIRCLE, 
-		MESH_TYPE_SQUARE, 
+		MESH_TYPE_PLANE,
 		MESH_TYPE_RING, 
 		MESH_TYPE_CUSTOM
 	} typedef MeshType;
@@ -75,7 +75,7 @@ private:
 	ci::TriMesh					mCylinder;
 	ci::TriMesh					mRing;
 	ci::TriMesh					mSphere;
-	ci::TriMesh					mSquare;
+	ci::TriMesh					mPlane;
 	
 	// For selecting mesh type from params
 	int32_t						mMeshIndex;
@@ -129,7 +129,7 @@ void TriMeshSampleApp::createMeshes()
 	mCylinder	= MeshHelper::createCylinderTriMesh( mNumSegments );
 	mRing		= MeshHelper::createRingTriMesh( mNumSegments );
 	mSphere		= MeshHelper::createSphereTriMesh( mNumSegments );
-	mSquare		= MeshHelper::createSquareTriMesh(mNumSegments, mNumSegments);
+	mPlane		= MeshHelper::createPlaneTriMesh(mNumSegments, mNumSegments);
 	
 	/////////////////////////////////////////////////////////////////////////////
 	// Custom mesh
@@ -240,8 +240,8 @@ void TriMeshSampleApp::draw()
 	case MESH_TYPE_SPHERE:
 		gl::draw( mSphere );
 		break;
-	case MESH_TYPE_SQUARE:
-		gl::draw( mSquare );
+	case MESH_TYPE_PLANE:
+		gl::draw( mPlane );
 		break;
 	}
 	
@@ -343,7 +343,7 @@ void TriMeshSampleApp::setup()
 	mMeshTitles.push_back( "Cylinder" );
 	mMeshTitles.push_back( "Cone" );
 	mMeshTitles.push_back( "Circle" );
-	mMeshTitles.push_back( "Square" );
+	mMeshTitles.push_back( "Plane" );
 	mMeshTitles.push_back( "Ring" );
 	mMeshTitles.push_back( "Custom" );
 
