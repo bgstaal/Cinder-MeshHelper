@@ -355,7 +355,7 @@ void TriMeshSampleApp::setup()
 	mParams.addParam( "Enable texture",	&mTextureEnabled,								"key=t"										);
 	mParams.addParam( "Mesh type",		mMeshTitles, &mMeshIndex,						"keyDecr=m keyIncr=M"						);
 	mParams.addParam( "Scale",			&mScale																						);
-	mParams.addParam( "Segments",		&mNumSegments,									"keyDecr=s keyIncr=S min=3 max=1024 step=1"	);
+	mParams.addParam( "Segments",		&mNumSegments,									"keyDecr=s keyIncr=S min=1 max=1024 step=1"	);
 	mParams.addParam( "Wireframe",		&mWireframe,									"key=w"										);
 	mParams.addSeparator();
 	mParams.addParam( "Full screen",	&mFullScreen,									"key=f"										);
