@@ -647,9 +647,9 @@ TriMesh MeshHelper::createPlaneTriMesh( uint32_t hSegments, uint32_t vSegments )
 	double yStep = 1.0 / (vSegments-1);
 	
 	
-	for (uint32_t x = 0; x < hSegments; x++)
+	for (uint32_t y = 0; y < vSegments; y++)
 	{
-		for (uint32_t y = 0; y < vSegments; y++)
+		for (uint32_t x = 0; x < hSegments; x++)
 		{
 			double xRat = xStep * x;
 			double yRat = yStep * y;
